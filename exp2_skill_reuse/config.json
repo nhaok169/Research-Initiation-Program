@@ -1,0 +1,12 @@
+{
+  "base_url": "https://integrate.api.nvidia.com/v1",
+  "model": "meta/llama-3.2-3b-instruct",
+  "api_key_env": "NVIDIA_API_KEY",
+  "tasks_file": "tasks.json",
+  "out_jsonl": "exp2_results.jsonl",
+  "temperature": 0.0,
+  "sleep_seconds": 0.2,
+  "request_timeout_seconds": 600,
+  "random_seed": 42,
+  "verify_code": true
+}

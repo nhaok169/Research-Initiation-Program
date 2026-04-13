@@ -1,0 +1,11 @@
+{
+  "base_url": "https://integrate.api.nvidia.com/v1",
+  "model": "microsoft/phi-3.5-vision-instruct",
+  "api_key_env": "NVIDIA_API_KEY",
+  "prompt_dir": "prompt_dump_overnight",
+  "out_jsonl": "model_outputs_overnight.jsonl",
+  "temperature": 0.0,
+  "sleep_seconds": 0.25,
+  "request_timeout_seconds": 600,
+  "system_file": "SYSTEM.txt"
+}

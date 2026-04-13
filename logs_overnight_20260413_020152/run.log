@@ -1,0 +1,22 @@
+[overnight] EXP_ROOT=/home/niuhaokai/niuhaokai/Game-RL/experiments
+[overnight] 已跳过 GPU 检查（SKIP_GPU_CHECK=1）
+已写入 /home/niuhaokai/niuhaokai/Game-RL/experiments/exp1_code_verify/tasks_overnight.json 共 32 条
+tasks.json 校验通过: 32 个任务，起点/终点可通行。
+已写入目录: /home/niuhaokai/niuhaokai/Game-RL/experiments/exp1_code_verify/prompt_dump_overnight
+文件: SYSTEM.txt, 以及各 tXX_mode_a_user.txt / tXX_mode_b_user.txt
+已写入 /home/niuhaokai/niuhaokai/Game-RL/experiments/exp2_skill_reuse/tasks_overnight.json 共 32 条
+已写入 /home/niuhaokai/niuhaokai/Game-RL/experiments/exp3_chart_transfer/tasks_overnight.json 共 34 条
+[overnight] wrote config_overnight_autogen.json ×3
+[overnight] 开始实验一 API…
+[配置] 单次请求超时 780s；大模型排队时进度条会在第 1 条停留较久，属正常。
+[等待响应] t001 mode=a（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t001 mode=b（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t002 mode=a（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t002 mode=b（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t003 mode=a（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t003 mode=b（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t004 mode=a（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t004 mode=b（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t005 mode=a（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+[等待响应] t005 mode=b（HTTP 阻塞中，大模型首包常需 1–5 分钟；超时 780s）
+HTTP 504 t005 mode=b: 

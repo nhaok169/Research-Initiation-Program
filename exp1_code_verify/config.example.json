@@ -1,0 +1,11 @@
+{
+  "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "model": "qwen-plus",
+  "api_key_env": "DASHSCOPE_API_KEY",
+  "prompt_dir": "prompt_dump",
+  "out_jsonl": "model_outputs.jsonl",
+  "temperature": 0.0,
+  "sleep_seconds": 0.25,
+  "request_timeout_seconds": 600,
+  "system_file": "SYSTEM.txt"
+}
