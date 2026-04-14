@@ -1,11 +1,13 @@
 {
   "base_url": "https://integrate.api.nvidia.com/v1",
-  "model": "microsoft/phi-3.5-vision-instruct",
+  "model": "meta/llama-3.2-3b-instruct",
   "api_key_env": "NVIDIA_API_KEY",
   "prompt_dir": "/home/niuhaokai/niuhaokai/Game-RL/experiments/exp1_code_verify/prompt_dump_overnight",
   "out_jsonl": "/home/niuhaokai/niuhaokai/Game-RL/experiments/exp1_code_verify/model_outputs_overnight.jsonl",
   "temperature": 0.0,
-  "sleep_seconds": 0.35,
-  "request_timeout_seconds": 780.0,
+  "sleep_seconds": 0.3,
+  "request_timeout_seconds": 600.0,
+  "max_retries": 12,
+  "retry_backoff_seconds": 10.0,
   "system_file": "SYSTEM.txt"
 }

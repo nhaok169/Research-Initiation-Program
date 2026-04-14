@@ -1,0 +1,360 @@
+{"task_id": "c001", "mode": "a", "ok": false, "reason": "wrong_number:parsed=1.0 gold=2", "raw": "根据给出的表格和 JSON 数据，我们可以看到列 C1 和 C2 的值分别为 2 和 6。由于 C1 的值小于 C2 的值，因此列 C1 的索引为 1。"}
+{"task_id": "c001", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c002", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，第一个类别是类J，其值为25，最后一个类别是类Q，其值为24。因此，第一个类别与最后一个类别数值之和为25+24=49。"}
+{"task_id": "c002", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[-1] + series[0]"}
+{"task_id": "c003", "mode": "a", "ok": false, "reason": "wrong_number:parsed=3.0 gold=0", "raw": "根据给出的数据，类别中最矮的柱子对应的值是36。因此，类别在series中的从零开始索引是3。"}
+{"task_id": "c003", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c004", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每行的总和。 \n\nR0 的总和是 1 + 10 + 12 = 23。 \nR1 的总和是 8 + 2 + 6 = 16。 \nR2 的总和是 18 + 10 + 6 = 34。 \n\n现在，我们需要找到最大和。 \n\n34 大于 23 和 16，所以最大和是 34。 \n\n因此，行索引为 2 的行和最大。 \n\n最终答案是2。"}
+{"task_id": "c004", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c005", "mode": "a", "ok": true, "reason": "ok", "raw": "取前两个类别的百分比为 (39 / 30) * 100 = 130%，四舍五入为整数百分比，答案为 130。"}
+{"task_id": "c005", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[0] / series[1]) * 100) if series[1] != 0 else 0\n```"}
+{"task_id": "c006", "mode": "a", "ok": false, "reason": "wrong_number:parsed=16.0 gold=5", "raw": "根据给出的表格，第 4 行、第 2 列的数值是 16。"}
+{"task_id": "c006", "mode": "b", "ok": false, "reason": "wrong_answer:got=20 gold=5", "raw": "ans = table[3][1]"}
+{"task_id": "c007", "mode": "a", "ok": true, "reason": "ok", "raw": "最矮的柱对应类别在 series 中的从零开始索引是 3。"}
+{"task_id": "c007", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c008", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值减最小值等于 43 - 7 = 36。"}
+{"task_id": "c008", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c009", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是 4 + 42 + 35 + 1 + 6 + 16 + 11 = 115。"}
+{"task_id": "c009", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c010", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最高柱的高度是 34。因此，最高柱对应类别在 series 中的索引是 1。"}
+{"task_id": "c010", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c011", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第一列（C1）的总和。 \n\n我们可以看到第一列的值分别是 7、18、13。 \n\n将这些值相加，我们得到 7 + 18 + 13 = 38。 \n\n因此，表格第一列（C1）的总和为 38。"}
+{"task_id": "c011", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c012", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 0 行、第 2 列的数值是 4。"}
+{"task_id": "c012", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = table[0][2]"}
+{"task_id": "c013", "mode": "a", "ok": false, "reason": "wrong_number:parsed=281.0 gold=279", "raw": "根据给出的数据，前两个类别是T和M。第一个类别T的高度为39，第二个类别M的高度为14。因此，计算结果为（39 / 14）* 100，等于 280.71%，四舍五入为 281%。"}
+{"task_id": "c013", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[0] / series[1]) * 100) if series[1] != 0 else 0\n```"}
+{"task_id": "c014", "mode": "a", "ok": true, "reason": "ok", "raw": "要计算表格第 4 行所有列数值之和，我们需要将每一列的值相加。 \n\n第 4 行的值为：17、0、3、2。\n\n将这些值相加，我们得到：17 + 0 + 3 + 2 = 22。\n\n因此，表格第 4 行所有列数值之和为 22。"}
+{"task_id": "c014", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[3])"}
+{"task_id": "c015", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第 0 列所有行的和。我们可以通过将每行的第 0 列元素相加来实现这一点。\n\n从表格中，我们可以看到第 0 列的元素分别是：4、11、3、4 和 0。\n\n现在，让我们将这些元素相加：\n\n4 + 11 = 15\n15 + 3 = 18\n18 + 4 = 22\n22 + 0 = 22\n\n因此，表格的第 0 列所有行的和是 22。"}
+{"task_id": "c015", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c016", "mode": "a", "ok": false, "reason": "wrong_number:parsed=0.0 gold=36", "raw": "首先，我们需要找到每个类别的最大值和最小值。从给定的数据中，我们可以看到：\n\n- 类S 的最大值是 3，最小值是 3。\n- 类D 的最大值是 7，最小值是 7。\n- 类V 的最大值是 39，最小值是 39。\n- 类Z 的最大值是 28，最小值是 28。\n\n接下来，我们需要找到所有类别中最大值减去最小值的总和。我们可以看到：\n\n- 类S 的最大值减去最小值为 3 - 3 = 0。\n- 类D 的最大值减去最小值为 7 - 7 = 0。\n- 类V 的最大值减去最小值为 39 - 39 = 0。\n- 类Z 的最大值减去最小值为 28 - 28 = 0。\n\n因此，所有类别中最大值减去最小值的总和为 0 + 0 + 0 + 0 = 0。"}
+{"task_id": "c016", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c017", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第 0 列所有行的总和。 \n\n我们可以看到第 0 列的值分别是 19、18、13 和 6。 \n\n现在，让我们将这些值相加：19 + 18 + 13 + 6 = 56。 \n\n因此，表格的第 0 列所有行的总和是 56。"}
+{"task_id": "c017", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c018", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：9 + 13 + 10 + 12 + 9 = 53\n行 1 的总和：17 + 4 + 6 + 13 + 12 = 52\n行 2 的总和：5 + 19 + 18 + 9 + 12 = 63\n行 3 的总和：17 + 0 + 9 + 9 + 6 = 41\n\n现在，我们需要找到最大总和。 \n\n最大总和是 63，出现在行 2 中。 \n\n因此，最终答案是 2。"}
+{"task_id": "c018", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c019", "mode": "a", "ok": false, "reason": "wrong_number:parsed=3.0 gold=2", "raw": "最矮的柱是类别B，其高度为25。因此，类别B对应的从零开始索引是3。"}
+{"task_id": "c019", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c020", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是 48，最小值是 11。因此，最大值减最小值等于 48 - 11 = 37。"}
+{"task_id": "c020", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c021", "mode": "a", "ok": false, "reason": "wrong_number:parsed=17.0 gold=4", "raw": "根据给出的表格，第 3 行的数值是 17。"}
+{"task_id": "c021", "mode": "b", "ok": false, "reason": "wrong_answer:got=10 gold=4", "raw": "ans = table[2][2]"}
+{"task_id": "c022", "mode": "a", "ok": false, "reason": "wrong_number:parsed=194.0 gold=218", "raw": "根据给出的数据，所有类别的总和是 25 + 22 + 43 + 44 + 26 + 47 + 11 = 194。"}
+{"task_id": "c022", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c023", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 4 行、第 0 列的数值是 8。"}
+{"task_id": "c023", "mode": "b", "ok": false, "reason": "wrong_answer:got=6 gold=8", "raw": "ans = table[3][0]"}
+{"task_id": "c024", "mode": "a", "ok": false, "reason": "wrong_number:parsed=2.0 gold=0", "raw": "首先，我们需要找到每行的总和。 \n\nR0 的总和是 20 + 2 + 20 = 42。 \nR1 的总和是 1 + 0 + 7 = 8。 \nR2 的总和是 6 + 0 + 19 = 25。 \nR3 的总和是 4 + 7 + 4 = 15。 \n\n现在，我们需要找到最大和。 \nR0 的和是 42， \nR1 的和是 8， \nR2 的和是 25， \nR3 的和是 15。 \n\nR2 的和最大。因此，答案是 2。"}
+{"task_id": "c024", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c025", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 2 行、第 4 列的数值是 12。"}
+{"task_id": "c025", "mode": "b", "ok": false, "reason": "wrong_answer:got=3 gold=12", "raw": "ans = table[1][3]"}
+{"task_id": "c026", "mode": "a", "ok": false, "reason": "wrong_number:parsed=3.0 gold=4", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：11 + 17 + 13 = 41\n行 1 的总和：11 + 2 + 16 = 29\n行 2 的总和：20 + 10 + 0 = 30\n行 3 的总和：13 + 15 + 3 = 31\n行 4 的总和：13 + 11 + 20 = 44\n\n现在，我们需要找到最大和。 \n\n行 3 的总和最大，等于 31。 \n\n因此，最终答案是3。"}
+{"task_id": "c026", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c027", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是 45，最小值是 17。因此，最大值减最小值等于 45 - 17 = 28。"}
+{"task_id": "c027", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c028", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 2 行（从零开始）的所有列数值之和是 15 + 20 + 15 = 50。"}
+{"task_id": "c028", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1])"}
+{"task_id": "c029", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第 0 列（从零开始）所有行之和。 \n\n我们可以看到第 0 列的值分别是 16、11、7、17。 \n\n现在，让我们计算这些值的总和：16 + 11 + 7 + 17 = 51。 \n\n因此，表格的第 0 列（从零开始）所有行之和为 51。"}
+{"task_id": "c029", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c030", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每行的总和。 \n\n行 0 的总和：11 + 5 + 9 = 25\n行 1 的总和：0 + 17 + 4 = 21\n行 2 的总和：8 + 1 + 1 = 10\n行 3 的总和：17 + 9 + 4 = 30\n\n现在，我们需要找到最大和。 \n\n最大和是 30，出现在行 3。 \n\n因此，最终答案是 3。"}
+{"task_id": "c030", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c031", "mode": "a", "ok": false, "reason": "wrong_number:parsed=2.0 gold=0", "raw": "根据给出的表格和 JSON 数据，我们可以看到列 C3 中的最大值是 18，列索引为 2。"}
+{"task_id": "c031", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c032", "mode": "a", "ok": false, "reason": "wrong_number:parsed=16.0 gold=18", "raw": "根据给出的表格，第 2 行、第 0 列的数值是 16。"}
+{"task_id": "c032", "mode": "b", "ok": false, "reason": "wrong_answer:got=16 gold=18", "raw": "ans = table[1][0]"}
+{"task_id": "c033", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 0 行、第 2 列的数值是 2。"}
+{"task_id": "c033", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = table[0][2]"}
+{"task_id": "c034", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第 0 列（从零开始）所有行之和。 \n\n我们可以通过将每一行的第 0 列元素相加来实现这一点。 \n\n行 0 的第 0 列元素是 2。 \n行 1 的第 0 列元素是 18。 \n行 2 的第 0 列元素是 17。 \n行 3 的第 0 列元素是 8。 \n行 4 的第 0 列元素是 5。 \n\n现在，我们将这些元素相加： \n2 + 18 = 20 \n20 + 17 = 37 \n37 + 8 = 45 \n45 + 5 = 50 \n\n因此，表格的第 0 列（从零开始）所有行之和为 50。"}
+{"task_id": "c034", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c035", "mode": "a", "ok": false, "reason": "wrong_number:parsed=2.0 gold=4", "raw": "根据给出的 ASCII 柱状图和 series JSON，最高柱的高度为 38。因此，最高柱对应类别在 series 中的索引是 2。"}
+{"task_id": "c035", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c036", "mode": "a", "ok": false, "reason": "wrong_number:parsed=7.0 gold=6", "raw": "最矮的柱是类U，高度为4。因此，类U对应的从零开始索引是7。"}
+{"task_id": "c036", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c037", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是 31 + 16 + 30 + 36 + 10 = 123。"}
+{"task_id": "c037", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c038", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是15 + 27 + 3 + 21 + 48 = 114。"}
+{"task_id": "c038", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c039", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到第 0 行所有列的数值之和。第 0 行的列标签为 'R0'，因此我们需要找到 'R0' 的值。 \n\n从给定的表格中，我们可以看到 'R0' 的值为 [20, 4, 15, 1]。 \n\n接下来，我们需要将这些值相加。 \n\n20 + 4 = 24 \n24 + 15 = 39 \n39 + 1 = 40 \n\n因此，第 0 行所有列的数值之和为 40。"}
+{"task_id": "c039", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c040", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第 0 列（从零开始）所有行之和。 \n\n我们可以通过将每一行的第 0 列元素相加来实现这一点。 \n\n行 0 的第 0 列元素是 19。 \n\n行 1 的第 0 列元素是 10。 \n\n行 2 的第 0 列元素是 20。 \n\n行 3 的第 0 列元素是 19。 \n\n因此，第 0 列所有行之和为 19 + 10 + 20 + 19 = 68。"}
+{"task_id": "c040", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c041", "mode": "a", "ok": true, "reason": "ok", "raw": "最矮的柱是类别Q，高度为25。因此，类别Q在series中的从零开始索引是1。"}
+{"task_id": "c041", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c042", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是 37，最小值是 16。因此，最大值减最小值等于 37 - 16 = 21。"}
+{"task_id": "c042", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c043", "mode": "a", "ok": false, "reason": "wrong_number:parsed=38.0 gold=31", "raw": "根据给出的表格，第 2 行（从零开始）的所有列数值之和是 18 + 1 + 19 = 38。"}
+{"task_id": "c043", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1])"}
+{"task_id": "c044", "mode": "a", "ok": false, "reason": "wrong_number:parsed=54.0 gold=41", "raw": "为了找到表格第 2 列（从零开始）所有行之和，我们需要将每行的第 2 个数字相加。 \n\n行 R0 的第 2 个数字是 20。\n行 R1 的第 2 个数字是 9。\n行 R2 的第 2 个数字是 4。\n行 R3 的第 2 个数字是 5。\n行 R4 的第 2 个数字是 16。\n\n将这些数字相加，我们得到：20 + 9 + 4 + 5 + 16 = 54。\n\n因此，表格第 2 列（从零开始）所有行之和为 54。"}
+{"task_id": "c044", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1][1:])"}
+{"task_id": "c045", "mode": "a", "ok": false, "reason": "wrong_number:parsed=0.0 gold=8", "raw": "根据给出的表格，第 3 行、第 1 列的数值是 0。"}
+{"task_id": "c045", "mode": "b", "ok": false, "reason": "wrong_answer:got=11 gold=8", "raw": "ans = table[2][0]"}
+{"task_id": "c046", "mode": "a", "ok": false, "reason": "wrong_number:parsed=18.0 gold=3", "raw": "根据给出的表格，第 1 行、第 0 列的数值是 18。"}
+{"task_id": "c046", "mode": "b", "ok": false, "reason": "wrong_answer:got=18 gold=3", "raw": "ans = table[0][0]"}
+{"task_id": "c047", "mode": "a", "ok": false, "reason": "wrong_number:parsed=2.0 gold=1", "raw": "根据给出的表格和 JSON 数据，我们可以看到列 C2 中的最大值是 18，列索引为 2。"}
+{"task_id": "c047", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c048", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是38，最小值是5。因此，最大值减最小值等于38-5=33。"}
+{"task_id": "c048", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c049", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 2 行（从零开始）的所有列数值之和是 3 + 0 + 4 = 7。"}
+{"task_id": "c049", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1])"}
+{"task_id": "c050", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的柱状图和 series JSON，类别中最矮的柱对应的值是 5.0。因此，类别在 series 中的从零开始索引是 3。"}
+{"task_id": "c050", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c051", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是类A和类E。计算 (第一个 / 第二个) * 100，我们得到 (27 / 47) * 100 = 57.35%。四舍五入为整数百分比后，答案是 57%。"}
+{"task_id": "c051", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[1] / series[0]) * 100) if series[0] != 0 else 0\n```"}
+{"task_id": "c052", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的柱状图和 series JSON，类Q 的高度是 23，而类 O 的高度是 37。由于问题要求找出最矮的柱，因此我们需要找到最小的高度。 \n\n最小的高度是 7。因此，柱状图中最矮的柱对应类别在 series 中的索引是 1。"}
+{"task_id": "c052", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c053", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是 C0 = 11、C1 = 17 和 C2 = 18。由于 C2 的值最大，因此答案是 2。"}
+{"task_id": "c053", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c054", "mode": "a", "ok": false, "reason": "wrong_number:parsed=8.0 gold=9", "raw": "根据给出的表格，第 0 行、第 4 列的数值是 8。"}
+{"task_id": "c054", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = table[0][4]"}
+{"task_id": "c055", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是T和Z。计算结果为：(33 / 8) * 100 = 412.5，四舍五入为 412。"}
+{"task_id": "c055", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[0] / series[1]) * 100) if series[1] != 0 else 0\n```"}
+{"task_id": "c056", "mode": "a", "ok": false, "reason": "wrong_number:parsed=42.0 gold=52", "raw": "为了找到表格中列标签为 'C3' 的所有行的总和，我们需要将每行的第三列元素相加。 \n\n从给定的表格中，我们可以看到第三列元素分别为 7、6、9、13 和 7。 \n\n将这些数字相加，我们得到：7 + 6 + 9 + 13 + 7 = 42。 \n\n因此，表格中列标签为 'C3' 的所有行的总和为 42。"}
+{"task_id": "c056", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[3][2:])"}
+{"task_id": "c057", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\nR0 的总和是 0 + 14 + 2 + 10 = 26。 \nR1 的总和是 18 + 13 + 18 + 12 = 61。 \nR2 的总和是 20 + 13 + 9 + 3 = 45。 \n\n现在，我们需要找到最大和。 \nR1 的总和最大，等于 61。 \n\n因此，答案是 1。"}
+{"task_id": "c057", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c058", "mode": "a", "ok": false, "reason": "wrong_number:parsed=0.0 gold=4", "raw": "根据给出的柱状图和 JSON 数据，我们可以看到类别 I 的柱子是最矮的，高出 0。因此，类别 I 在 series 中的从零开始索引是 0。"}
+{"task_id": "c058", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c059", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是类V和类D。类V的值为3，类D的值为4。计算 (3 / 4) * 100，结果为 75。"}
+{"task_id": "c059", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[0] / series[1]) * 100) if series[1] != 0 else 0\n```"}
+{"task_id": "c060", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到第 0 行的所有列数值之和。第 0 行的列标签为 'R0'，因此我们需要找到 'R0' 的值。 \n\n在给定的表格中，第 0 行的值为 [19, 16, 12, 14, 18]。 \n\n现在，我们需要将这些值相加：19 + 16 + 12 + 14 + 18 = 79。 \n\n因此，表格第 0 行所有列数值之和为 79。"}
+{"task_id": "c060", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c061", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，第一个类别是类M，其值为47。最后一个类别是类Y，其值为6。因此，第一个类别与最后一个类别数值之和为47+6=53。"}
+{"task_id": "c061", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[-1] + series[0]"}
+{"task_id": "c062", "mode": "a", "ok": false, "reason": "wrong_number:parsed=41.0 gold=38", "raw": "根据给出的表格，第二列（从零开始）的总和是：2 + 9 + 10 + 20 = 41。"}
+{"task_id": "c062", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1][1:])"}
+{"task_id": "c063", "mode": "a", "ok": false, "reason": "wrong_number:parsed=2.0 gold=0", "raw": "最矮的柱对应类别在 series 中的索引是 2。"}
+{"task_id": "c063", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c064", "mode": "a", "ok": true, "reason": "ok", "raw": "为了找到表格中列标签为 'C3' 的所有行的总和，我们需要将每行的第四个元素相加。 \n\n从给定的表格中，我们可以看到第四个元素（列标签为 'C3' 的值）分别为 7、11、9、13 和 4。 \n\n将这些值相加，我们得到：7 + 11 + 9 + 13 + 4 = 44。 \n\n因此，表格中列标签为 'C3' 的所有行的总和为 44。"}
+{"task_id": "c064", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0][2])"}
+{"task_id": "c065", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 R0 的总和是 16 + 3 + 9 = 28。 \n行 R1 的总和是 2 + 5 + 8 = 15。 \n行 R2 的总和是 14 + 16 + 4 = 34。 \n行 R3 的总和是 13 + 2 + 7 = 22。 \n行 R4 的总和是 14 + 11 + 0 = 25。 \n\n现在，我们需要找到这些总和中最大的一个。 \n34 是最大的总和。 \n\n因此，行的索引是 2。"}
+{"task_id": "c065", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c066", "mode": "a", "ok": false, "reason": "wrong_number:parsed=4.0 gold=3", "raw": "根据给出的数据，最高柱的高度为 20。因此，最高柱对应的类别在 series 中的索引是 4。"}
+{"task_id": "c066", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c067", "mode": "a", "ok": false, "reason": "wrong_number:parsed=80.0 gold=81", "raw": "根据给出的数据，取前两个类别是类B和类K。类B的高度为25，类K的高度为31。因此，计算结果为（25 / 31）* 100，四舍五入为整数百分比，结果为 80。"}
+{"task_id": "c067", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[1] / series[0]) * 100) if series[0] != 0 else 0\n```"}
+{"task_id": "c068", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值减最小值等于 13.0 - 3.0 = 10.0。"}
+{"task_id": "c068", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c069", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：17 + 15 + 8 + 1 = 41\n行 1 的总和：20 + 6 + 9 + 11 = 46\n行 2 的总和：1 + 20 + 10 + 8 = 39\n行 3 的总和：3 + 11 + 13 + 12 = 39\n行 4 的总和：14 + 12 + 10 + 5 = 41\n\n现在，我们需要找到最大和。 \n\n最大和是 46，这对应于行 1 的索引。 \n\n因此，最终答案是 1。"}
+{"task_id": "c069", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c070", "mode": "a", "ok": false, "reason": "wrong_number:parsed=1.0 gold=3", "raw": "首先，我们需要找到每一行的总和。 \n\n行 R0 的总和为 2 + 13 + 2 + 13 = 30。 \n行 R1 的总和为 19 + 5 + 17 + 9 = 50。 \n行 R2 的总和为 10 + 3 + 2 + 10 = 25。 \n行 R3 的总和为 9 + 9 + 14 + 19 = 51。 \n行 R4 的总和为 13 + 5 + 14 + 11 = 43。 \n\n现在，我们需要找到这些总和中最大的一个。 \n行 R1 的总和 50 是最大。 \n\n因此，最终答案是 1。"}
+{"task_id": "c070", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c071", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第三列（从零开始）的总和是 20 + 5 + 14 + 7 = 46。"}
+{"task_id": "c071", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0][2])"}
+{"task_id": "c072", "mode": "a", "ok": false, "reason": "wrong_number:parsed=2.0 gold=14", "raw": "根据给出的表格，第 0 行、第 1 列的数值是 2。"}
+{"task_id": "c072", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = table[0][1]"}
+{"task_id": "c073", "mode": "a", "ok": false, "reason": "wrong_number:parsed=6.0 gold=4", "raw": "最矮的柱是类A，其高度为12。因此，类A对应的从零开始索引是6。"}
+{"task_id": "c073", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c074", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，第一个类别是类C，最后一个类别是类T。类C的值为42，类T的值为44。因此，第一个类别与最后一个类别数值之和为42+44=86。"}
+{"task_id": "c074", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[0] + series[-1]"}
+{"task_id": "c075", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的柱状图和 series JSON，柱状图中最矮的柱对应类别在 series 中的索引是 2。"}
+{"task_id": "c075", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c076", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：5 + 19 + 19 = 43\n行 1 的总和：10 + 18 + 1 = 29\n行 2 的总和：0 + 2 + 1 = 3\n行 3 的总和：20 + 18 + 8 = 46\n行 4 的总和：20 + 6 + 18 = 44\n\n现在，我们需要找到这些总和中最大的一个。 \n\n行 0 的总和：43\n行 1 的总和：29\n行 2 的总和：3\n行 3 的总和：46\n行 4 的总和：44\n\n行 3 的总和最大。因此，答案是 3。"}
+{"task_id": "c076", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c077", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是24+33+36+7+21+16=137。"}
+{"task_id": "c077", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c078", "mode": "a", "ok": false, "reason": "wrong_number:parsed=5.0 gold=4", "raw": "根据给出的数据，最高柱的高度是 38。因此，最高柱对应的类别在 series 中的索引是 5。"}
+{"task_id": "c078", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c079", "mode": "a", "ok": false, "reason": "wrong_number:parsed=36.0 gold=37", "raw": "根据给出的数据，最大值减最小值等于 44.0 - 8.0 = 36.0。"}
+{"task_id": "c079", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c080", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是：\n\n- C0：12\n- C1：19\n- C2：15\n- C3：16\n- C4：19\n\n由于 C1 和 C4 的值相等，但 C1 的索引较小，因此 C1 的列和最大。"}
+{"task_id": "c080", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c081", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，第一个类别是类D，最后一个类别是类O。第一个类别的值为38，最后一个类别的值为47。因此，第一个类别与最后一个类别数值之和为38+47=85。"}
+{"task_id": "c081", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[-1] + series[0]"}
+{"task_id": "c082", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\nR0 的总和是 7 + 1 + 18 = 26。\nR1 的总和是 3 + 6 + 0 = 9。\nR2 的总和是 14 + 10 + 13 = 37。\nR3 的总和是 4 + 13 + 6 = 23。\n\n现在，我们需要找到这些总和中最大的一个。 \n\n37 是 26、9 和 23 中最大的一个。 \n\n因此，答案是 2。"}
+{"task_id": "c082", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c083", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第一列（C1）的总和。 \n\n我们可以看到第一列的值分别是 6、15、10、17 和 11。 \n\n现在，让我们将这些值相加：6 + 15 = 21，21 + 10 = 31，31 + 17 = 48，48 + 11 = 59。 \n\n因此，第一列（C1）的总和为 59。"}
+{"task_id": "c083", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c084", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是 46，最小值是 6。因此，最大值减最小值等于 46 - 6 = 40。"}
+{"task_id": "c084", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c085", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格第 0 行（从零开始）的所有列数值之和。 \n\n我们可以看到第 0 行的列标签是 'R0'，其对应的数值是 [17, 8, 17]。 \n\n要找到这些数值的总和，我们可以简单地将它们相加：17 + 8 + 17 = 42。 \n\n因此，表格第 0 行所有列数值之和为 42。"}
+{"task_id": "c085", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c086", "mode": "a", "ok": false, "reason": "wrong_number:parsed=22.0 gold=39", "raw": "首先，我们需要找到第 1 行所有列数值的总和。 \n\n第 1 行的数值为 15、3、4 和 0。 \n\n将这些数字相加，我们得到：15 + 3 + 4 + 0 = 22。 \n\n因此，第 1 行所有列数值的总和为 22。"}
+{"task_id": "c086", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c087", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是 30 + 42 + 35 + 34 = 141。"}
+{"task_id": "c087", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c088", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 2 行（从零开始）的所有列数值之和是 0 + 10 + 9 + 18 + 6 = 43。"}
+{"task_id": "c088", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1])"}
+{"task_id": "c089", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第 0 列（从零开始）所有行之和。 \n\n我们可以看到第 0 列的值分别是 2、4、0、14 和 18。 \n\n现在，让我们计算这些值的总和： \n2 + 4 = 6 \n6 + 0 = 6 \n6 + 14 = 20 \n20 + 18 = 38 \n\n因此，表格的第 0 列（从零开始）所有行之和为 38。"}
+{"task_id": "c089", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c090", "mode": "a", "ok": false, "reason": "wrong_number:parsed=42.0 gold=43", "raw": "根据给出的表格，第三列（从零开始）的总和是 5 + 3 + 19 + 15 = 42。"}
+{"task_id": "c090", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0][2])"}
+{"task_id": "c091", "mode": "a", "ok": false, "reason": "wrong_number:parsed=1.0 gold=2", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是：\n\n- C0：16（在行 R1 中出现）\n- C1：19（在行 R0 中出现）\n- C2：18（在行 R2 和 R4 中出现）\n\n由于 C2 的最大值出现在两个行中，并且这两个行的索引小于 C1 的最大值，因此 C2 的最大值不是我们要找的答案。我们需要找到 C1 和 C2 的最大值中较小的索引。\n\n在 C1 中，最大值 19 出现在行 R0 中，索引为 0。 \n\n在 C2 中，最大值 18 出现在行 R2 和 R4 中，索引分别为 2 和 4。由于 2 小于 4，因此 C2 的最大值出现在索引为 2 的列中。\n\n因此，列和最大值出现在索引为 0 的列 C1 中。"}
+{"task_id": "c091", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c092", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是类M和类E。类M的高度为48，类E的高度为14。因此，计算结果为 (48 / 14) * 100 = 342.86，四舍五入为整数百分比，结果为 343。"}
+{"task_id": "c092", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[0] / series[1]) * 100) if series[1] != 0 else 0\n```"}
+{"task_id": "c093", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是47，最小值是1。因此，最大值减最小值等于47-1=46。"}
+{"task_id": "c093", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c094", "mode": "a", "ok": false, "reason": "wrong_number:parsed=3.0 gold=2", "raw": "最矮的柱对应类别在 series 中的从零开始索引是 3。"}
+{"task_id": "c094", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c095", "mode": "a", "ok": false, "reason": "wrong_number:parsed=29.0 gold=32", "raw": "根据给出的表格，第二列（从零开始）的总和是 9 + 10 + 10 = 29。"}
+{"task_id": "c095", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1])"}
+{"task_id": "c096", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的 ASCII 柱状图和 JSON 数据，我们可以看到每个类别的数值分别为：20、46、10、30、4、36 和 27。要计算所有类别数值的总和，我们可以简单地将这些数字相加：\n\n20 + 46 = 66\n66 + 10 = 76\n76 + 30 = 106\n106 + 4 = 110\n110 + 36 = 146\n146 + 27 = 173\n\n因此，所有类别数值的总和为 173。"}
+{"task_id": "c096", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c097", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第 0 列（从零开始）所有行之和。 \n\n我们可以通过将每一行的第 0 列元素相加来实现这一点。 \n\n行 0 的第 0 列元素是 7。 \n\n行 1 的第 0 列元素是 20。 \n\n行 2 的第 0 列元素是 2。 \n\n因此，第 0 列所有行之和为 7 + 20 + 2 = 29。"}
+{"task_id": "c097", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c098", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 2 行（从零开始）的所有列数值之和是 15 + 7 + 19 + 6 + 12 = 59。"}
+{"task_id": "c098", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1])"}
+{"task_id": "c099", "mode": "a", "ok": false, "reason": "wrong_number:parsed=17.0 gold=11", "raw": "根据给出的表格，第 1 行、第 1 列的数值是 17。"}
+{"task_id": "c099", "mode": "b", "ok": false, "reason": "wrong_answer:got=17 gold=11", "raw": "ans = table[0][0]"}
+{"task_id": "c100", "mode": "a", "ok": true, "reason": "ok", "raw": "取前两个类别的数值分别为 12 和 35。计算 (第一个 / 第二个) * 100 = (12 / 35) * 100 = 34.29%。四舍五入为整数百分比，答案为 34%。"}
+{"task_id": "c100", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[0] / series[1]) * 100) if series[1] != 0 else 0\n```"}
+{"task_id": "c101", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是47，最小值是18。因此，最大值减最小值等于47-18=29。"}
+{"task_id": "c101", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c102", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是类J和类R。类J的值为6，类R的值为26。计算 (第一个 / 第二个) * 100 = (6 / 26) * 100 = 23.08%。四舍五入为整数百分比，答案为 23%。"}
+{"task_id": "c102", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:table is not available in this task", "raw": "```python\nans = int((table[0][0] / table[1][0]) * 100)\n```"}
+{"task_id": "c103", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是 2 + 14 + 38 + 10 + 46 = 110。"}
+{"task_id": "c103", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c104", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 3 行、第 0 列的数值是 16。"}
+{"task_id": "c104", "mode": "b", "ok": false, "reason": "wrong_answer:got=12 gold=16", "raw": "ans = table[2][0]"}
+{"task_id": "c105", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到第 0 行所有列的数值之和。从给定的表格中，我们可以看到第 0 行的列标签是 'R0'，其对应的数值是 [19, 19, 12, 10, 0]。\n\n要找到这些数值的总和，我们可以使用以下步骤：\n\n1. 将所有数值相加：19 + 19 + 12 + 10 + 0 = 60\n2. 由于所有列的数值之和都是相同的，因此我们可以直接将第 0 行的数值之和作为答案。\n\n因此，第 0 行所有列的数值之和为 60。"}
+{"task_id": "c105", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c106", "mode": "a", "ok": false, "reason": "wrong_number:parsed=305.0 gold=170", "raw": "根据给出的 ASCII 柱状图和 JSON 数据，我们可以看到每个类别的总和分别为：\n\n- 类Q：6\n- 类I：23 + 6 = 29\n- 类R：36 + 23 + 6 = 65\n- 类H：6 + 6 = 12\n- 类P：39 + 39 = 78\n- 类N：39 + 39 = 78\n- 类T：21 + 6 = 27\n\n将所有类别的总和相加，我们得到：\n\n6 + 29 + 65 + 12 + 78 + 78 + 27 = 305\n\n最终答案是305。"}
+{"task_id": "c106", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c107", "mode": "a", "ok": true, "reason": "ok", "raw": "最矮的柱是类别J，其高度为16。因此，类别J在series中的从零开始索引是1。"}
+{"task_id": "c107", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c108", "mode": "a", "ok": false, "reason": "wrong_number:parsed=4.0 gold=3", "raw": "根据给出的数据，最高柱的高度是 26。因此，最高柱对应的类别是类G。类G的索引是 4。"}
+{"task_id": "c108", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c109", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到第 1 列（列标签为 'C1'）的所有行之和。 \n\n我们可以通过将每行的第 1 个元素相加来实现这一点。 \n\n行 0 的第 1 个元素是 5。 \n行 1 的第 1 个元素是 14。 \n行 2 的第 1 个元素是 4。 \n\n现在，我们将这些数字相加：5 + 14 + 4 = 23。 \n\n因此，第 1 列（列标签为 'C1'）的所有行之和为 23。"}
+{"task_id": "c109", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c110", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是：\n\n- C0：1\n- C1：19\n- C2：19\n\n由于 C2 的最大值与 C1 相同，因此我们需要找到 C2 的索引。从表格中我们可以看到，C2 的最大值出现在行 R0、R1 和 R2 中。因此，C2 的索引是 2。\n\n最终答案是2。"}
+{"task_id": "c110", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c111", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：11 + 5 + 20 + 19 + 1 = 56\n行 1 的总和：18 + 20 + 20 + 12 + 10 = 80\n行 2 的总和：13 + 3 + 0 + 3 + 8 = 27\n行 3 的总和：7 + 16 + 16 + 17 + 18 = 74\n行 4 的总和：18 + 7 + 14 + 11 + 12 = 62\n\n现在，我们需要找到这些总和中最大的一个。 \n\n80 是最大的总和，因此答案是 1。"}
+{"task_id": "c111", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c112", "mode": "a", "ok": false, "reason": "wrong_number:parsed=0.0 gold=44", "raw": "首先，我们需要找到每个类别的最大值和最小值。从给定的数据中，我们可以看到：\n\n- 类T 的最大值是 3，最小值是 3。\n- 类Z 的最大值是 46，最小值是 46。\n- 类A 的最大值是 8，最小值是 8。\n- 类V 的最大值是 2，最小值是 2。\n\n接下来，我们需要找到所有类别中最大值减去最小值。我们可以看到：\n\n- 类T：3 - 3 = 0\n- 类Z：46 - 46 = 0\n- 类A：8 - 8 = 0\n- 类V：2 - 2 = 0\n\n因此，所有类别中最大值减去最小值的总和是 0。"}
+{"task_id": "c112", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c113", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一行的总和分别是：\n\n- 行 0 的总和：7 + 16 + 5 = 28\n- 行 1 的总和：17 + 5 + 10 = 32\n- 行 2 的总和：17 + 13 + 14 = 44\n- 行 3 的总和：7 + 12 + 20 = 39\n- 行 4 的总和：5 + 5 + 20 = 30\n\n通过比较这些总和，我们可以看到行 2 的总和最大，即 44。因此，答案是 2。"}
+{"task_id": "c113", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c114", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到第 1 列（列标签为 'C1'）的所有行之和。 \n\n我们可以通过将每行的第 1 个元素相加来实现这一点。 \n\n行 0 的第 1 个元素是 13。 \n行 1 的第 1 个元素是 6。 \n行 2 的第 1 个元素是 3。 \n\n因此，第 1 列的所有行之和是 13 + 6 + 3 = 22。"}
+{"task_id": "c114", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c115", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，第一个类别是类S，其值为24。最后一个类别是类A，其值为27。因此，第一个类别与最后一个类别数值之和为24 + 27 = 51。"}
+{"task_id": "c115", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[-1] + series[0]"}
+{"task_id": "c116", "mode": "a", "ok": true, "reason": "ok", "raw": "最矮的柱是 27，出现在类别 L 和 G 中。因此，**最矮柱对应类别在 series 中的从零开始索引是 0。**"}
+{"task_id": "c116", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c117", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是类D（35）和类N（14）。计算 (35 / 14) * 100，四舍五入为整数百分比，结果为 250.00%，四舍五入后变为 250%。"}
+{"task_id": "c117", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = int((series[0] / series[1]) * 100)"}
+{"task_id": "c118", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每行的总和。 \n\nR0 的总和是 1 + 14 + 8 + 11 = 34。 \nR1 的总和是 2 + 14 + 3 + 7 = 26。 \nR2 的总和是 6 + 18 + 11 + 19 = 54。 \n\n现在，我们需要找到最大和。 \nR2 的总和最大，54。 \n\n因此，答案是 2。"}
+{"task_id": "c118", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c119", "mode": "a", "ok": false, "reason": "wrong_number:parsed=31.0 gold=40", "raw": "首先，我们需要找到表格的第一列（C1）的总和。 \n\n我们可以通过将每一行的第一列数字相加来实现这一点。 \n\n行 R0 的第一列数字是 18。 \n行 R1 的第一列数字是 8。 \n行 R2 的第一列数字是 5。 \n\n现在，我们将这些数字相加： \n18 + 8 + 5 = 31 \n\n因此，表格第一列的总和为 31。"}
+{"task_id": "c119", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c120", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：3 + 4 + 13 + 1 + 8 = 29\n行 1 的总和：20 + 4 + 4 + 7 + 4 = 39\n行 2 的总和：10 + 7 + 12 + 15 + 4 = 48\n行 3 的总和：18 + 20 + 8 + 20 + 13 = 79\n行 4 的总和：12 + 14 + 2 + 20 + 2 = 50\n\n现在，我们需要找到最大总和。 \n\n最大总和是 79， corresponding 到行索引 3。 \n\n因此，最终答案是 3。"}
+{"task_id": "c120", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c121", "mode": "a", "ok": false, "reason": "wrong_number:parsed=39.0 gold=65", "raw": "根据给出的表格，第二列（从零开始）的总和是 2 + 14 + 17 + 6 = 39。"}
+{"task_id": "c121", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1][1:])"}
+{"task_id": "c122", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是24+43+42+11+4=124。"}
+{"task_id": "c122", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c123", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 0 行、第 2 列的数值是 20。"}
+{"task_id": "c123", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = table[0][2]"}
+{"task_id": "c124", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是类I和类W。类I的高度为23，类W的高度为28。计算 (23 / 28) * 100，四舍五入为整数百分比，结果为 82。"}
+{"task_id": "c124", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[1] / series[0]) * 100) if series[0] != 0 else 0\n```"}
+{"task_id": "c125", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是37，最小值是9。因此，最大值减最小值等于37-9=28。"}
+{"task_id": "c125", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c126", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，第一个类别是类U，最后一个类别是类T。类U的值为20，类T的值为10。因此，第一个类别与最后一个类别数值之和为20+10=30。"}
+{"task_id": "c126", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[0] + series[-1]"}
+{"task_id": "c127", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是 48，最小值是 9。因此，最大值减最小值等于 48 - 9 = 39。"}
+{"task_id": "c127", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c128", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每行的总和。 \n\nR0 的总和是 10 + 13 + 8 = 31。 \nR1 的总和是 16 + 2 + 8 = 26。 \nR2 的总和是 18 + 20 + 2 = 40。 \n\n现在，我们需要找到最大和。 \n\n40 大于 31 和 26，所以最大和是 40。 \n\n因此，行索引为 2 的行和最大。 \n\n最终答案是2。"}
+{"task_id": "c128", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c129", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是47，最小值是5。因此，最大值减最小值等于47-5=42。"}
+{"task_id": "c129", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c130", "mode": "a", "ok": true, "reason": "ok", "raw": "最矮的柱对应类别在 series 中的从零开始索引是 1。"}
+{"task_id": "c130", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c131", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最高柱的高度为 41。因此，最高柱对应的类别在 series 中的索引是 2。"}
+{"task_id": "c131", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c132", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格第 0 行（从零开始）的所有列数值之和。 \n\n表格第 0 行的列数值为 4、7、9 和 8。 \n\n我们将这些数字相加：4 + 7 + 9 + 8 = 28。 \n\n因此，表格第 0 行所有列数值之和为 28。"}
+{"task_id": "c132", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c133", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是44，最小值是4。因此，最大值减最小值等于44-4=40。"}
+{"task_id": "c133", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c134", "mode": "a", "ok": false, "reason": "wrong_number:parsed=3.0 gold=2", "raw": "根据给出的数据，最高柱对应的类别是类Q，其索引是3。"}
+{"task_id": "c134", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c135", "mode": "a", "ok": false, "reason": "wrong_number:parsed=16.0 gold=30", "raw": "首先，我们需要找到表格的第一行，即列标签 'C0'。这行的数字是 1、14 和 1。 \n\n接下来，我们需要将这些数字相加，得到总和。 \n\n1 + 14 + 1 = 16 \n\n因此，表格第 0 列（从零开始）所有行之和为 16。"}
+{"task_id": "c135", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c136", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是：31 + 35 + 32 + 23 + 37 + 33 + 21 = 212。"}
+{"task_id": "c136", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c137", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是 48，最小值是 21。因此，最大值减最小值等于 48 - 21 = 27。"}
+{"task_id": "c137", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c138", "mode": "a", "ok": false, "reason": "wrong_number:parsed=0.0 gold=2", "raw": "根据给出的表格，列和最大值出现在第 0 列。"}
+{"task_id": "c138", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c139", "mode": "a", "ok": true, "reason": "ok", "raw": "最矮的柱对应类别在 series 中的从零开始索引是 3。"}
+{"task_id": "c139", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c140", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第一列（C1）的总和。 \n\n我们可以看到第一列的值分别是 11、9、18、19 和 18。 \n\n现在，让我们将这些值相加： \n11 + 9 = 20 \n20 + 18 = 38 \n38 + 19 = 57 \n57 + 18 = 75 \n\n因此，第一列（C1）的总和为 75。"}
+{"task_id": "c140", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c141", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，第一个类别和最后一个类别的数值之和是 25 + 31 = 56。"}
+{"task_id": "c141", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[-1] + series[0]"}
+{"task_id": "c142", "mode": "a", "ok": false, "reason": "wrong_number:parsed=2.0 gold=1", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是：\n\n- C0：12（在 R4 中）\n- C1：14（在 R0 中）\n- C2：3（在 R2 和 R4 中）\n\n由于 C2 的最大值是 3，而 R2 的索引是 2，而 R4 的索引是 4，我们需要比较这两个值。由于 2 小于 4，所以 C2 的最大值的索引是 2。\n\n因此，列和最大值的索引是 2。"}
+{"task_id": "c142", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c143", "mode": "a", "ok": false, "reason": "wrong_number:parsed=13.0 gold=8", "raw": "根据给出的表格，第 3 行的数值是 13。"}
+{"task_id": "c143", "mode": "b", "ok": false, "reason": "wrong_answer:got=6 gold=8", "raw": "ans = table[2][2]"}
+{"task_id": "c144", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是 6 + 42 + 35 + 25 + 12 + 24 = 144。"}
+{"task_id": "c144", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c145", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的 ASCII 柱状图和 series JSON，最高柱的高度是 46。类别对应的索引是 series 中从零开始索引的位置。因此，最高柱对应的类别在 series 中的索引是 6。"}
+{"task_id": "c145", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c146", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的 ASCII 柱状图和 series JSON，最高柱的高度为 36。因此，最高柱对应类别在 series 中的索引是 0。"}
+{"task_id": "c146", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c147", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到第 2 行的所有列数值之和。从给定的表格中，我们可以看到第 2 行的值为 3、18、3、9 和 17。\n\n现在，让我们计算这些值的总和：\n\n3 + 18 = 21\n21 + 3 = 24\n24 + 9 = 33\n33 + 17 = 50\n\n因此，第 2 行所有列数值之和为 50。"}
+{"task_id": "c147", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1])"}
+{"task_id": "c148", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是类Q（39）和类T（42）。我们需要计算 (第一个 / 第二个) * 100，四舍五入为整数百分比。\n\n计算结果为：(39 / 42) * 100 = 92.86%，四舍五入为 93%。"}
+{"task_id": "c148", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[1] / series[0]) * 100) if series[0] != 0 else 0\n```"}
+{"task_id": "c149", "mode": "a", "ok": false, "reason": "wrong_number:parsed=4.0 gold=5", "raw": "最矮的柱对应类别在 series 中的索引是 4。"}
+{"task_id": "c149", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c150", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是42，最小值是1。因此，最大值减最小值等于42-1=41。"}
+{"task_id": "c150", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c151", "mode": "a", "ok": false, "reason": "wrong_number:parsed=4.0 gold=3", "raw": "根据给出的表格，列和最大值出现在第 4 列。因此，答案是 4。"}
+{"task_id": "c151", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c152", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到第 0 行所有列的数值之和。第 0 行的列标签为 'R0'，因此我们需要找到 'R0' 的值。 \n\n从给定的表格中，我们可以看到 'R0' 的值为 [10, 8, 20]。 \n\n接下来，我们需要将这些值相加。 \n\n10 + 8 = 18 \n18 + 20 = 38 \n\n因此，第 0 行所有列的数值之和为 38。"}
+{"task_id": "c152", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c153", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是 11 + 43 + 36 + 12 + 19 + 7 = 128。"}
+{"task_id": "c153", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c154", "mode": "a", "ok": false, "reason": "wrong_number:parsed=75.0 gold=56", "raw": "根据给出的数据，第一个类别是类B，最后一个类别是类D。类B的值为31，类D的值为44。因此，第一个类别与最后一个类别数值之和为31+44=75。"}
+{"task_id": "c154", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[-1] + series[0]"}
+{"task_id": "c155", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，所有类别的总和是 9 + 40 + 28 + 41 = 118。"}
+{"task_id": "c155", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = sum_series(series)"}
+{"task_id": "c156", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，第一个类别是类W，其值为3。最后一个类别是类X，其值为39。因此，第一个类别与最后一个类别数值之和为3 + 39 = 42。"}
+{"task_id": "c156", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = series[-1] + series[0]"}
+{"task_id": "c157", "mode": "a", "ok": false, "reason": "wrong_number:parsed=61.0 gold=614", "raw": "根据给出的数据，前两个类别是类U和类Y。类U的值为43，类Y的值为7。计算 (43 / 7) * 100，结果为 61.43，四舍五入为整数百分比，结果为 61。"}
+{"task_id": "c157", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = int((series[0] / series[1]) * 100)"}
+{"task_id": "c158", "mode": "a", "ok": false, "reason": "wrong_number:parsed=3.0 gold=0", "raw": "最矮的柱对应类别在 series 中的从零开始索引是 3。"}
+{"task_id": "c158", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmin(series)"}
+{"task_id": "c159", "mode": "a", "ok": false, "reason": "wrong_number:parsed=1.0 gold=0", "raw": "根据给出的 ASCII 柱状图和 series JSON，最高柱的高度为 30。类别对应的索引是 series 中从零开始索引的第一个 30。因此，最高柱对应的类别在 series 中的索引是 1。"}
+{"task_id": "c159", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax(series)"}
+{"task_id": "c160", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：10 + 13 + 3 + 3 + 1 = 30\n行 1 的总和：0 + 4 + 20 + 5 + 10 = 39\n行 2 的总和：11 + 14 + 19 + 8 + 2 = 54\n行 3 的总和：11 + 10 + 5 + 3 + 12 = 41\n\n现在，我们需要找到最大总和。 \n\n最大总和是 54， corresponding 到行索引 2。 \n\n因此，最终答案是 2。"}
+{"task_id": "c160", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c161", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：13 + 20 + 5 + 3 = 41\n行 1 的总和：4 + 1 + 5 + 3 = 13\n行 2 的总和：13 + 18 + 15 + 18 = 64\n行 3 的总和：14 + 5 + 19 + 12 = 50\n行 4 的总和：11 + 19 + 0 + 4 = 34\n\n现在，我们需要找到最大总和。 \n\n64 是最大总和，因此答案是 2。"}
+{"task_id": "c161", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c162", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是：\n\n- C0：18\n- C1：18\n- C2：20\n\n由于 C2 的值最大，因此答案是 2。"}
+{"task_id": "c162", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c163", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 R0 的总和是 11 + 20 + 12 + 4 = 47。 \n行 R1 的总和是 17 + 19 + 1 + 0 = 37。 \n行 R2 的总和是 20 + 5 + 16 + 15 = 56。\n\n现在，我们需要找到最大和。由于 56 大于 47 和 37，因此最大和是 56。因此，所需的行索引是 2。"}
+{"task_id": "c163", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c164", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每行的总和。 \n\nR0 的总和是 10 + 8 + 1 = 19。\nR1 的总和是 16 + 7 + 17 = 40。\nR2 的总和是 20 + 12 + 12 = 44。\nR3 的总和是 7 + 2 + 14 = 23。\n\n现在，我们需要找到这些总和中最大的一个。 \n\n44 是最大的总和，所以答案是 2。"}
+{"task_id": "c164", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c165", "mode": "a", "ok": false, "reason": "wrong_number:parsed=2.0 gold=1", "raw": "根据给出的表格和 JSON 数据，我们可以看到列 C2 的最大值是 20，列索引为 2。"}
+{"task_id": "c165", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c166", "mode": "a", "ok": false, "reason": "wrong_number:parsed=17.0 gold=11", "raw": "根据给出的表格，第 2 行、第 1 列的数值是 17。"}
+{"task_id": "c166", "mode": "b", "ok": false, "reason": "wrong_answer:got=17 gold=11", "raw": "ans = table[1][0]"}
+{"task_id": "c167", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：16 + 11 + 3 + 1 + 5 = 36\n行 1 的总和：15 + 4 + 13 + 3 + 8 = 43\n行 2 的总和：19 + 6 + 6 + 3 + 12 = 46\n行 3 的总和：6 + 14 + 6 + 10 + 3 = 39\n\n现在，我们需要找到最大总和。 \n\n最大总和是 46，出现在行 2。 \n\n因此，最终答案是 2。"}
+{"task_id": "c167", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c168", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，最大值是 45，最小值是 16。因此，最大值减最小值等于 45 - 16 = 29。"}
+{"task_id": "c168", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = max_series(series) - min_series(series)"}
+{"task_id": "c169", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别分别是类O和类Y。类O的高度为38，类Y的高度为37。计算 (38 / 37) * 100，结果为 102.63，四舍五入为整数百分比，结果为 103。"}
+{"task_id": "c169", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[0] / series[1]) * 100) if series[1] != 0 else 0\n```"}
+{"task_id": "c170", "mode": "a", "ok": true, "reason": "ok", "raw": "首先，我们需要找到表格的第 0 列所有行的总和。从给定的表格中，我们可以看到第 0 列的值分别为 13、0、1、9 和 9。 \n\n要找到总和，我们只需将这些值相加：13 + 0 + 1 + 9 + 9 = 32。 \n\n因此，表格第 0 列所有行的总和为 32。"}
+{"task_id": "c170", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c171", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是：\n\n- C0：17\n- C1：20\n- C2：20\n- C3：19\n- C4：18\n\n由于 C2 和 C1 的值相等，但 C2 的索引较小，因此 C2 的列和最大。"}
+{"task_id": "c171", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c172", "mode": "a", "ok": false, "reason": "wrong_number:parsed=20.0 gold=34", "raw": "首先，我们需要找到表格的第一列（C1）的总和。 \n\n我们可以通过将每一行的第一列数字相加来实现这一点。 \n\n行 R0 的第一列数字是 14。 \n行 R1 的第一列数字是 5。 \n行 R2 的第一列数字是 1。 \n\n现在，我们将这些数字相加： \n14 + 5 + 1 = 20 \n\n因此，表格第一列的总和为 20。"}
+{"task_id": "c172", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0])"}
+{"task_id": "c173", "mode": "a", "ok": false, "reason": "wrong_number:parsed=14.0 gold=0", "raw": "根据给出的表格，列和最大值出现在第 2 列。因此，答案是 14。"}
+{"task_id": "c173", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c174", "mode": "a", "ok": false, "reason": "wrong_number:parsed=1.0 gold=4", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是：\n\n- C0：16（在行 R0）\n- C1：13（在行 R1）\n- C2：17（在行 R1）\n- C3：17（在行 R1）\n- C4：19（在行 R3）\n\n由于 C1 和 C2 的值在 R1 中相等，但 C1 的索引小于 C2，因此 C1 的最大值是 13，位于索引 1。"}
+{"task_id": "c174", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}
+{"task_id": "c175", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第二列（从零开始）的总和是：7 + 20 + 7 + 12 + 8 = 54。"}
+{"task_id": "c175", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[0][1:])"}
+{"task_id": "c176", "mode": "a", "ok": false, "reason": "wrong_number:parsed=1.0 gold=0", "raw": "首先，我们需要找到每一行的总和。 \n\n行 0 的总和：16 + 14 + 15 + 1 + 9 = 55\n行 1 的总和：20 + 6 + 10 + 16 + 2 = 54\n行 2 的总和：3 + 5 + 17 + 17 + 0 = 42\n行 3 的总和：20 + 2 + 6 + 20 + 6 = 54\n\n现在，我们需要找到最大和。 \n\n行 1 和行 3 的总和最大，均为 54。由于 1 小于 3，所以我们选择小的索引，即 1。 \n\n最终答案是1。"}
+{"task_id": "c176", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_row(table)"}
+{"task_id": "c177", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的数据，前两个类别是类T和类N。类T的值为2，类N的值为25。因此，计算结果为（2/25）*100，四舍五入为整数百分比，结果为8。"}
+{"task_id": "c177", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed expression: IfExp", "raw": "```python\nans = int((series[1] / series[0]) * 100) if series[0] != 0 else 0\n```"}
+{"task_id": "c178", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格，第 4 列（从零开始）的所有行之和为 3 + 9 + 15 + 12 + 9 = 48。"}
+{"task_id": "c178", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[3][3:])"}
+{"task_id": "c179", "mode": "a", "ok": false, "reason": "wrong_number:parsed=48.0 gold=28", "raw": "根据给出的表格，第 2 行（从零开始）的所有列数值之和为 19 + 12 + 17 = 48。"}
+{"task_id": "c179", "mode": "b", "ok": false, "reason": "unsafe_or_invalid:disallowed call: sum", "raw": "ans = sum(table[1])"}
+{"task_id": "c180", "mode": "a", "ok": true, "reason": "ok", "raw": "根据给出的表格和 JSON 数据，我们可以看到每一列的最大值分别是：\n\n- C0：13\n- C1：20\n- C2：19\n\n由于 C1 的值最大，因此答案是 1。"}
+{"task_id": "c180", "mode": "b", "ok": true, "reason": "ok", "raw": "ans = argmax_col(table)"}

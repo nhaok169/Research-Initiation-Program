@@ -23,7 +23,7 @@ import time
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Dict, List, Set, Tuple
 
 try:
     from tqdm import tqdm
@@ -103,6 +103,10 @@ def _post_chat(
     return json.loads(body)
 
 
+def _is_retryable_http(code: int) -> bool:
+    return code in {429, 500, 502, 503, 504}
+
+
 def _assistant_text(data: Dict[str, Any]) -> str:
     try:
         return (data["choices"][0]["message"]["content"] or "").strip()
@@ -173,6 +177,11 @@ def main() -> None:
         action="store_true",
         help="关闭进度条（重定向日志时可用）",
     )
+    ap.add_argument(
+        "--fresh",
+        action="store_true",
+        help="忽略已有 out_jsonl，从头重跑（默认启用断点续跑）",
+    )
     args = ap.parse_args()
 
     cfg_path: Path = args.config
@@ -188,6 +197,8 @@ def main() -> None:
     temperature = float(cfg.get("temperature", 0.0))
     sleep_s = float(cfg.get("sleep_seconds", 0.25))
     request_timeout_sec = float(cfg.get("request_timeout_seconds", 600))
+    max_retries = int(cfg.get("max_retries", 5))
+    retry_backoff_sec = float(cfg.get("retry_backoff_seconds", 8.0))
     prompt_dir = Path(cfg.get("prompt_dir", "prompt_dump"))
     if not prompt_dir.is_absolute():
         prompt_dir = (cfg_path.parent / prompt_dir).resolve()
@@ -228,6 +239,25 @@ def main() -> None:
 
     system_text = _read_text(system_path)
     rows: List[Dict[str, Any]] = []
+    done_pairs: Set[Tuple[str, str]] = set()
+    if out_path.exists() and not args.fresh:
+        with out_path.open(encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    rec = json.loads(line)
+                    tid = str(rec.get("task_id", ""))
+                    mode = str(rec.get("mode", "")).lower()
+                    if tid and mode in {"a", "b"}:
+                        done_pairs.add((tid, mode))
+                        rows.append(rec)
+                except Exception:
+                    continue
+        _log_line(f"[断点续跑] 发现已完成 {len(done_pairs)} 条，将跳过。", None)
+    elif args.fresh and out_path.exists():
+        out_path.write_text("", encoding="utf-8")
 
     total_req = len(pairs)
     use_progress = not args.no_progress
@@ -248,36 +278,70 @@ def main() -> None:
             elif use_progress:
                 sys.stderr.write(_progress_text(idx - 1, total_req, tid, mode))
                 sys.stderr.flush()
+            if (tid, mode) in done_pairs:
+                if pbar is not None:
+                    pbar.update(1)
+                continue
 
             user_path = prompt_dir / f"{tid}_mode_{mode}_user.txt"
             if not user_path.is_file():
                 raise SystemExit(f"缺少文件: {user_path}")
             user_text = _read_text(user_path)
-            try:
-                data = _post_chat(
-                    base_url,
-                    api_key,
-                    model,
-                    system_text,
-                    user_text,
-                    temperature,
-                    request_timeout_sec,
-                    pbar=pbar,
-                    tid=tid,
-                    mode=mode,
-                )
-                raw = _assistant_text(data)
-            except urllib.error.HTTPError as e:
-                err = e.read().decode("utf-8", errors="replace")
-                if e.code == 403 and "Unpurchased" in err:
-                    raise SystemExit(
-                        f"HTTP 403 {tid} mode={mode}: 当前账号未开通或未购买 config 里的 model。\n"
-                        f"请到百炼控制台「模型广场」开通对应模型，或把 config.json 的 model 改成账号已可用的名称"
-                        f"（本实验为纯文本，可试 qwen-plus / qwen-turbo；多模态再试 qwen-vl-plus 等）。\n"
-                        f"详情: {err}"
-                    ) from e
-                raise SystemExit(f"HTTP {e.code} {tid} mode={mode}: {err}") from e
-            rows.append({"task_id": tid, "mode": mode, "raw": raw})
+            last_err = ""
+            raw = ""
+            ok = False
+            for attempt in range(1, max_retries + 2):
+                try:
+                    data = _post_chat(
+                        base_url,
+                        api_key,
+                        model,
+                        system_text,
+                        user_text,
+                        temperature,
+                        request_timeout_sec,
+                        pbar=pbar,
+                        tid=tid,
+                        mode=mode,
+                    )
+                    raw = _assistant_text(data)
+                    ok = True
+                    break
+                except urllib.error.HTTPError as e:
+                    err = e.read().decode("utf-8", errors="replace")
+                    last_err = f"HTTP {e.code} {tid} mode={mode}: {err}"
+                    if e.code == 403 and "Unpurchased" in err:
+                        raise SystemExit(
+                            f"HTTP 403 {tid} mode={mode}: 当前账号未开通或未购买 config 里的 model。\n"
+                            f"请到控制台开通模型，或把 config.json 的 model 改成账号已可用名称。\n详情: {err}"
+                        ) from e
+                    if attempt <= max_retries and _is_retryable_http(e.code):
+                        wait_s = retry_backoff_sec * attempt
+                        _log_line(
+                            f"[重试 {attempt}/{max_retries}] {tid} mode={mode} {e.code}，{wait_s:.1f}s 后重试",
+                            pbar,
+                        )
+                        time.sleep(wait_s)
+                        continue
+                    raise SystemExit(last_err) from e
+                except (TimeoutError, urllib.error.URLError, OSError) as e:
+                    last_err = f"请求异常 {tid} mode={mode}: {type(e).__name__}:{e}"
+                    if attempt <= max_retries:
+                        wait_s = retry_backoff_sec * attempt
+                        _log_line(
+                            f"[重试 {attempt}/{max_retries}] {last_err}，{wait_s:.1f}s 后重试",
+                            pbar,
+                        )
+                        time.sleep(wait_s)
+                        continue
+                    raise SystemExit(last_err) from e
+            if not ok:
+                raise SystemExit(last_err or f"未知错误: {tid} mode={mode}")
+            rec = {"task_id": tid, "mode": mode, "raw": raw}
+            rows.append(rec)
+            done_pairs.add((tid, mode))
+            with out_path.open("a", encoding="utf-8") as fa:
+                fa.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
             if pbar is not None:
                 pbar.update(1)
@@ -292,11 +356,7 @@ def main() -> None:
             sys.stderr.write("\n")
             sys.stderr.flush()
 
-    with out_path.open("w", encoding="utf-8") as f:
-        for r in rows:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
-
-    print("已写入", out_path, "共", len(rows), "条")
+    print("已写入", out_path, "共", len(done_pairs), "条")
     print("下一步: python grade_jsonl.py --input", out_path.name)
 
 

@@ -1,12 +1,14 @@
 {
   "base_url": "https://integrate.api.nvidia.com/v1",
-  "model": "microsoft/phi-3.5-vision-instruct",
+  "model": "meta/llama-3.2-3b-instruct",
   "api_key_env": "NVIDIA_API_KEY",
   "tasks_file": "/home/niuhaokai/niuhaokai/Game-RL/experiments/exp2_skill_reuse/tasks_overnight.json",
   "out_jsonl": "/home/niuhaokai/niuhaokai/Game-RL/experiments/exp2_skill_reuse/exp2_results_overnight.jsonl",
   "temperature": 0.0,
-  "sleep_seconds": 0.35,
-  "request_timeout_seconds": 780.0,
+  "sleep_seconds": 0.3,
+  "request_timeout_seconds": 600.0,
+  "max_retries": 12,
+  "retry_backoff_seconds": 10.0,
   "verify_code": true,
   "random_seed": 42
 }

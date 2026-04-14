@@ -82,7 +82,7 @@ def main() -> None:
         "--model",
         default=os.environ.get(
             "OVERNIGHT_MODEL",
-            "microsoft/phi-3.5-vision-instruct",
+            "meta/llama-3.2-3b-instruct",
         ),
     )
     ap.add_argument("--timeout", type=float, default=120.0)
@@ -105,8 +105,8 @@ def main() -> None:
         err = e.read().decode("utf-8", errors="replace")
         print(f"HTTP {e.code}: {err}", file=sys.stderr)
         print(
-            "提示: NVIDIA 文档里多模态 Phi 的 model 为 microsoft/phi-3.5-vision-instruct（3.5 带点）。"
-            "若仍失败可试 OVERNIGHT_MODEL=meta/llama-3.2-3b-instruct。",
+            "提示: 小模型纯文本可试 OVERNIGHT_MODEL=meta/llama-3.2-3b-instruct；"
+            "多模态为 microsoft/phi-3.5-vision-instruct（易排队/504）。",
             file=sys.stderr,
         )
         sys.exit(2)

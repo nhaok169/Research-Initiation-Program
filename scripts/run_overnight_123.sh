@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # 顺序跑实验一、二、三（API 批跑），默认 nohup 后台。
 #
-# 默认按「≤7 小时 + NVIDIA 免费 NIM」调参：
+# 默认按「NVIDIA 免费 NIM + 尽量多跑」调参：
 #   - 端点: integrate.api.nvidia.com
-#   - 模型: microsoft/phi-3.5-vision-instruct（官方 model 字符串为 3.5 带点，勿写成 phi-3_5）
-#   - Key: 环境变量 NVIDIA_API_KEY（与 api_key_env 一致）
-#   - 规模: 约 196 次 chat 请求（32+32+34 任务 × 各 2 次），按 ~90s/次粗算约 5h，留队列波动余量
+#   - 模型默认: meta/llama-3.2-3b-instruct（小、纯文本、排队通常比 VL 少；实验均为 ASCII/文本）
+#   - 需要 VLM 时再设: OVERNIGHT_MODEL=microsoft/phi-3.5-vision-instruct（易 504，慎选）
+#   - Key: 环境变量 NVIDIA_API_KEY
+#   - 规模默认: 100+100+180 题 → 约 760 次 chat（可用 EXP1_COUNT 等覆盖）
 #
 # 跑前自检: python3 scripts/preflight_overnight.py
 #
@@ -20,8 +21,6 @@
 #   ./scripts/run_overnight_123.sh              # 后台
 #   ./scripts/run_overnight_123.sh --foreground # 前台
 #
-# 更快纯文本备用模型: OVERNIGHT_MODEL=meta/llama-3.2-3b-instruct
-
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -31,13 +30,15 @@ E2="${EXP_ROOT}/exp2_skill_reuse"
 E3="${EXP_ROOT}/exp3_chart_transfer"
 
 OVERNIGHT_BASE_URL="${OVERNIGHT_BASE_URL:-https://integrate.api.nvidia.com/v1}"
-OVERNIGHT_MODEL="${OVERNIGHT_MODEL:-microsoft/phi-3.5-vision-instruct}"
+OVERNIGHT_MODEL="${OVERNIGHT_MODEL:-meta/llama-3.2-3b-instruct}"
 OVERNIGHT_API_KEY_ENV="${OVERNIGHT_API_KEY_ENV:-NVIDIA_API_KEY}"
-OVERNIGHT_SLEEP_SECONDS="${OVERNIGHT_SLEEP_SECONDS:-0.35}"
-OVERNIGHT_REQUEST_TIMEOUT="${OVERNIGHT_REQUEST_TIMEOUT:-780}"
-EXP1_COUNT="${EXP1_COUNT:-32}"
-EXP2_COUNT="${EXP2_COUNT:-32}"
-EXP3_COUNT="${EXP3_COUNT:-34}"
+OVERNIGHT_SLEEP_SECONDS="${OVERNIGHT_SLEEP_SECONDS:-0.3}"
+OVERNIGHT_REQUEST_TIMEOUT="${OVERNIGHT_REQUEST_TIMEOUT:-600}"
+OVERNIGHT_MAX_RETRIES="${OVERNIGHT_MAX_RETRIES:-12}"
+OVERNIGHT_RETRY_BACKOFF="${OVERNIGHT_RETRY_BACKOFF:-10}"
+EXP1_COUNT="${EXP1_COUNT:-100}"
+EXP2_COUNT="${EXP2_COUNT:-100}"
+EXP3_COUNT="${EXP3_COUNT:-180}"
 SEED="${OVERNIGHT_SEED:-42}"
 MIN_FREE_MIB="${GPU_MIN_FREE_MIB:-2048}"
 MAX_UTIL="${GPU_MAX_UTIL_PCT:-95}"
@@ -45,6 +46,7 @@ MAX_UTIL="${GPU_MAX_UTIL_PCT:-95}"
 export E1 E2 E3 EXP_ROOT
 export OVERNIGHT_BASE_URL OVERNIGHT_MODEL OVERNIGHT_API_KEY_ENV
 export OVERNIGHT_SLEEP_SECONDS OVERNIGHT_REQUEST_TIMEOUT
+export OVERNIGHT_MAX_RETRIES OVERNIGHT_RETRY_BACKOFF
 export EXP1_COUNT EXP2_COUNT EXP3_COUNT SEED
 
 run_inner() {
@@ -88,8 +90,10 @@ base = os.environ["OVERNIGHT_BASE_URL"]
 model = os.environ["OVERNIGHT_MODEL"]
 key_env = os.environ["OVERNIGHT_API_KEY_ENV"]
 seed = int(os.environ["SEED"])
-sleep_seconds = float(os.environ.get("OVERNIGHT_SLEEP_SECONDS", "0.35"))
-request_timeout = float(os.environ.get("OVERNIGHT_REQUEST_TIMEOUT", "780"))
+sleep_seconds = float(os.environ.get("OVERNIGHT_SLEEP_SECONDS", "0.3"))
+request_timeout = float(os.environ.get("OVERNIGHT_REQUEST_TIMEOUT", "600"))
+max_retries = int(os.environ.get("OVERNIGHT_MAX_RETRIES", "12"))
+retry_backoff = float(os.environ.get("OVERNIGHT_RETRY_BACKOFF", "10"))
 
 
 def dump(path: Path, obj: dict) -> None:
@@ -107,6 +111,8 @@ dump(
         "temperature": 0.0,
         "sleep_seconds": sleep_seconds,
         "request_timeout_seconds": request_timeout,
+        "max_retries": max_retries,
+        "retry_backoff_seconds": retry_backoff,
         "system_file": "SYSTEM.txt",
     },
 )
@@ -121,6 +127,8 @@ dump(
         "temperature": 0.0,
         "sleep_seconds": sleep_seconds,
         "request_timeout_seconds": request_timeout,
+        "max_retries": max_retries,
+        "retry_backoff_seconds": retry_backoff,
         "verify_code": True,
         "random_seed": seed,
     },
@@ -136,6 +144,8 @@ dump(
         "temperature": 0.0,
         "sleep_seconds": sleep_seconds,
         "request_timeout_seconds": request_timeout,
+        "max_retries": max_retries,
+        "retry_backoff_seconds": retry_backoff,
     },
 )
 print("[overnight] wrote config_overnight_autogen.json ×3")
@@ -184,6 +194,8 @@ nohup env \
   OVERNIGHT_API_KEY_ENV="${OVERNIGHT_API_KEY_ENV}" \
   OVERNIGHT_SLEEP_SECONDS="${OVERNIGHT_SLEEP_SECONDS}" \
   OVERNIGHT_REQUEST_TIMEOUT="${OVERNIGHT_REQUEST_TIMEOUT}" \
+  OVERNIGHT_MAX_RETRIES="${OVERNIGHT_MAX_RETRIES}" \
+  OVERNIGHT_RETRY_BACKOFF="${OVERNIGHT_RETRY_BACKOFF}" \
   EXP1_COUNT="${EXP1_COUNT}" EXP2_COUNT="${EXP2_COUNT}" EXP3_COUNT="${EXP3_COUNT}" \
   SEED="${SEED}" \
   GPU_MIN_FREE_MIB="${MIN_FREE_MIB}" GPU_MAX_UTIL_PCT="${MAX_UTIL}" \
