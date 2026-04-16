@@ -64,13 +64,24 @@
 
 ### 实验3（文档暂不写结论，先保留设计与诊断能力）
 
-- 已支持 `mode=b` 的结构化错误诊断与失败分布统计
-- 可直接分析：
+- 实验3现已**跑通**（见你终端日志），并支持 `mode=b` 的结构化错误诊断与失败分布统计。
+- 当前这份 `tasks_overnight.json` + `exp3_model_outputs_overnight.jsonl` 重评分后的结果：
+  - `mode_a_accuracy=0.6667`
+  - `mode_b_accuracy=0.5889`
+- `mode=b` 诊断能力（`N=180`）：
+  - **失败数**：74
+  - **失败时可精确定位率**：`63/74=0.8513`（有行号/列号/片段）
+  - **错误大类占比**：
+    - `syntax_or_rule_error`: 30.0%
+    - `runtime_error`: 5.0%
+    - `answer_wrong`: 6.1%
+    - `success`: 58.9%
+- 可直接复现与查看诊断汇总：
 
 ```bash
 cd exp3_chart_transfer
-python grade_jsonl.py --tasks tasks_overnight.json --input exp3_model_outputs_overnight.jsonl --out exp3_graded_overnight.jsonl
-python analyze_exp3_diagnostics.py --tasks tasks_overnight.json --graded exp3_graded_overnight.jsonl
+python3 grade_jsonl.py --tasks tasks_overnight.json --input exp3_model_outputs_overnight.jsonl --out exp3_graded_overnight.jsonl
+python3 analyze_exp3_diagnostics.py --tasks tasks_overnight.json --graded exp3_graded_overnight.jsonl
 ```
 
 ## 一键运行
