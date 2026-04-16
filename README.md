@@ -62,9 +62,9 @@
 - `reach_goal`：scratch `0.02` -> skill `0.28`
 - 结论：当前强模板设定下，**技能模板显著降低成本且质量更高**。
 
-### 实验3（文档暂不写结论，先保留设计与诊断能力）
+### 实验3
 
-- 实验3现已**跑通**（见你终端日志），并支持 `mode=b` 的结构化错误诊断与失败分布统计。
+- 实验3现已**跑通**，并支持 `mode=b` 的结构化错误诊断与失败分布统计。
 - 当前这份 `tasks_overnight.json` + `exp3_model_outputs_overnight.jsonl` 重评分后的结果：
   - `mode_a_accuracy=0.6667`
   - `mode_b_accuracy=0.5889`
