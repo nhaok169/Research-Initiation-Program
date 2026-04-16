@@ -1,31 +1,27 @@
-"""复制到 Qwen2.5-VL API 的 system/user 模板（实验一）。"""
+"""实验一：开环首轮提示与闭环修正提示。"""
 
-SYSTEM_SHARED = (
-    "你是网格导航助手。坐标一律为 (行,列)，先行后列；行号向下增大，列号向右增大。"
-    "合法移动：up/down/left/right（或 上/下/左/右）。撞墙或越界则该步无效（不会移动）。"
-    "你必须严格依据给定的 grid（0 空地，1 墙）与起点、终点作答。"
+from __future__ import annotations
+
+from typing import Any, Dict
+
+from evaluator import build_prompt_block
+
+SYSTEM_CODE = (
+    "你是网格导航编程助手。坐标为 (行,列)，先行后列；行号向下增大，列号向右增大。"
+    "你必须严格依据给定的 grid（0 空地，1 墙）与起点、终点编写代码。"
 )
 
 
-def user_mode_a(block: str) -> str:
+def _code_protocol() -> str:
     return (
-        block
-        + "\n【方式 A】请只用自然语言给出从起点到终点的移动步骤，"
-        "例如：先向上走 3 步，再向右走 4 步；或列出动作序列如：上,上,上,右,右,右,右。"
-        "不要写代码，不要写 markdown 代码块。"
-    )
-
-
-def user_mode_b(block: str) -> str:
-    example = (
-        "\n【方式 B — 必须严格遵守，否则判 0 分】\n"
-        "评测器已在沙箱里注入 **move(\"up\"|\"down\"|\"left\"|\"right\")**（无参数、无返回值，只改变角色位置）。\n"
-        "**禁止**：def / class / import / print / while / if（除隐含在 for 外）/ 赋值 / 自己重新定义 move / "
+        "\n【输出协议 — 必须严格遵守】\n"
+        "评测器已在沙箱里注入 **move(\"up\"|\"down\"|\"left\"|\"right\")**（只改变位置，无返回值）。\n"
+        "**禁止**：def / class / import / print / while / if / 赋值 / 重新定义 move / "
         "除 range 以外的任何函数调用。\n"
-        "**只允许** 两种顶层语句，且只能写在 ```python 代码块里，不要解释：\n"
-        "  1) move(\"down\")  这种单行调用，方向必须是英文小写字符串常量；\n"
-        "  2) for _ in range(3): move(\"up\")  其中 range( ) 里必须是 **正整数常量**（不要用变量）。\n"
-        "可写多行、多个 for。下面是一个合法示例（若你的路径不同请改数字与方向，但格式必须同类）：\n"
+        "**只允许** 两种顶层语句，且只能写在一个 ```python 代码块中，不要多余解释：\n"
+        "  1) move(\"down\")  单行调用，方向为英文小写；\n"
+        "  2) for _ in range(3): move(\"up\")  其中 range( ) 内必须是正整数常量。\n"
+        "可写多行、多个 for。示例：\n"
         "```python\n"
         "for i in range(4):\n"
         "    move(\"down\")\n"
@@ -33,4 +29,21 @@ def user_mode_b(block: str) -> str:
         "    move(\"right\")\n"
         "```\n"
     )
-    return block + example
+
+
+def build_open_loop_prompt(task: Dict[str, Any]) -> str:
+    """单次独立对话的首条 user：任务描述 + 代码协议（与历史「方式 B」一致）。"""
+    return build_prompt_block(task) + _code_protocol()
+
+
+def build_feedback_prompt(task: Dict[str, Any], previous_code: str, error_message: str) -> str:
+    """闭环下一轮 user：附上上一轮代码与沙箱/执行器返回的错误说明。"""
+    block = build_prompt_block(task)
+    code_show = previous_code.strip() or "（未能提取到代码）"
+    return (
+        block
+        + "\n你上一轮提交的代码在执行时出现以下问题，请**只输出修正后的完整** ```python 代码块"
+        "（仍需满足同一协议），不要复述错误：\n\n"
+        f"【错误信息】\n{error_message}\n\n"
+        f"【上一轮代码】\n```python\n{code_show}\n```\n"
+    )

@@ -6,7 +6,7 @@
 #   - 模型默认: meta/llama-3.2-3b-instruct（小、纯文本、排队通常比 VL 少；实验均为 ASCII/文本）
 #   - 需要 VLM 时再设: OVERNIGHT_MODEL=microsoft/phi-3.5-vision-instruct（易 504，慎选）
 #   - Key: 环境变量 NVIDIA_API_KEY
-#   - 规模默认: 100+100+180 题 → 约 760 次 chat（可用 EXP1_COUNT 等覆盖）
+#   - 规模默认: 实验一每题最多 6 次 chat（开环≤3 + 闭环≤3）+ 实验二/三见各脚本（可用 EXP1_COUNT 等覆盖）
 #
 # 跑前自检: python3 scripts/preflight_overnight.py
 #
@@ -69,7 +69,6 @@ run_inner() {
     --seed "${SEED}"
 
   (cd "${E1}" && python3 validate_tasks.py --tasks tasks_overnight.json)
-  (cd "${E1}" && python3 dump_prompts.py --tasks tasks_overnight.json --out prompt_dump_overnight)
 
   python3 "${EXP_ROOT}/scripts/generate_exp2_tasks.py" \
     --out "${E2}/tasks_overnight.json" \
@@ -106,14 +105,14 @@ dump(
         "base_url": base,
         "model": model,
         "api_key_env": key_env,
-        "prompt_dir": str(e1 / "prompt_dump_overnight"),
-        "out_jsonl": str(e1 / "model_outputs_overnight.jsonl"),
+        "tasks_file": str(e1 / "tasks_overnight.json"),
+        "out_jsonl": str(e1 / "exp1_compare_overnight.jsonl"),
         "temperature": 0.0,
         "sleep_seconds": sleep_seconds,
         "request_timeout_seconds": request_timeout,
         "max_retries": max_retries,
         "retry_backoff_seconds": retry_backoff,
-        "system_file": "SYSTEM.txt",
+        "max_calls_per_task": 3,
     },
 )
 dump(
@@ -151,12 +150,11 @@ dump(
 print("[overnight] wrote config_overnight_autogen.json ×3")
 PY
 
-  echo "[overnight] 开始实验一 API…" >&2
-  (cd "${E1}" && python3 bailian_batch_from_dump.py --config config_overnight_autogen.json --no-progress)
+  echo "[overnight] 开始实验一（开环 vs 闭环，每臂最多 3 次调用）…" >&2
+  (cd "${E1}" && python3 run_exp1_compare.py --config config_overnight_autogen.json --no-progress)
 
-  echo "[overnight] 实验一评分…" >&2
-  (cd "${E1}" && python3 grade_jsonl.py --tasks tasks_overnight.json \
-    --input model_outputs_overnight.jsonl --out graded_overnight.jsonl)
+  echo "[overnight] 实验一汇总…" >&2
+  (cd "${E1}" && python3 summarize_exp1.py --input exp1_compare_overnight.jsonl || true)
 
   echo "[overnight] 开始实验二 API…" >&2
   (cd "${E2}" && python3 run_exp2_tokens.py --config config_overnight_autogen.json)
@@ -174,8 +172,11 @@ PY
   echo "[overnight] 实验三按题型汇总…" >&2
   (cd "${E3}" && python3 summarize_exp3.py --tasks tasks_overnight.json --graded exp3_graded_overnight.jsonl || true)
 
+  echo "[overnight] 实验三诊断分析…" >&2
+  (cd "${E3}" && python3 analyze_exp3_diagnostics.py --tasks tasks_overnight.json --graded exp3_graded_overnight.jsonl > exp3_diagnostics_overnight.txt || true)
+
   echo "[overnight] 全部完成。" >&2
-  echo "[overnight] 产物: ${E1}/graded_overnight.jsonl , ${E2}/exp2_results_overnight.jsonl , ${E3}/exp3_graded_overnight.jsonl" >&2
+  echo "[overnight] 产物: ${E1}/exp1_compare_overnight.jsonl , ${E2}/exp2_results_overnight.jsonl , ${E3}/exp3_graded_overnight.jsonl , ${E3}/exp3_diagnostics_overnight.txt" >&2
 }
 
 if [[ "${1:-}" == "--foreground" ]]; then

@@ -1,0 +1,99 @@
+## Mode B 诊断总览
+{
+  "n_mode_b": 180,
+  "failure_count": 74,
+  "precise_location_on_failures": 63,
+  "precise_location_rate_on_failures": 0.8513513513513513
+}
+
+## 按错误大类
+- success: 106 (58.9%) ##############----------
+- syntax_or_rule_error: 54 (30.0%) #######-----------------
+- answer_wrong: 11 (6.1%) #-----------------------
+- runtime_error: 9 (5.0%) #-----------------------
+
+## 按错误代码
+- ok: 106 (58.9%) ##############----------
+- disallowed_call: 41 (22.8%) #####-------------------
+- disallowed_expr: 12 (6.7%) ##----------------------
+- wrong_answer: 11 (6.1%) #-----------------------
+- index_out_of_range: 9 (5.0%) #-----------------------
+- table_unavailable: 1 (0.6%) ------------------------
+
+## 分题型错误分布
+{
+  "argmax_col": {
+    "success": {
+      "count": 16,
+      "ratio": 1.0
+    }
+  },
+  "argmax_index": {
+    "success": {
+      "count": 10,
+      "ratio": 1.0
+    }
+  },
+  "argmax_row": {
+    "success": {
+      "count": 22,
+      "ratio": 1.0
+    }
+  },
+  "argmin_index": {
+    "success": {
+      "count": 18,
+      "ratio": 1.0
+    }
+  },
+  "col_sum": {
+    "syntax_or_rule_error": {
+      "count": 26,
+      "ratio": 1.0
+    }
+  },
+  "first_plus_last": {
+    "runtime_error": {
+      "count": 9,
+      "ratio": 1.0
+    }
+  },
+  "max_minus_min": {
+    "success": {
+      "count": 19,
+      "ratio": 1.0
+    }
+  },
+  "mid_ratio_percent": {
+    "success": {
+      "count": 2,
+      "ratio": 0.13333333333333333
+    },
+    "syntax_or_rule_error": {
+      "count": 13,
+      "ratio": 0.8666666666666667
+    }
+  },
+  "row_sum": {
+    "syntax_or_rule_error": {
+      "count": 15,
+      "ratio": 1.0
+    }
+  },
+  "sum_all": {
+    "success": {
+      "count": 14,
+      "ratio": 1.0
+    }
+  },
+  "table_cell": {
+    "answer_wrong": {
+      "count": 11,
+      "ratio": 0.6875
+    },
+    "success": {
+      "count": 5,
+      "ratio": 0.3125
+    }
+  }
+}

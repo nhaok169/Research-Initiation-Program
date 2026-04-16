@@ -1,4 +1,4 @@
-"""实验三：图表/表格（文本呈现）问答，方式 A 解析数值，方式 B 执行受限代码。"""
+"""实验三：图表/表格问答评估，支持 mode B 结构化诊断。"""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from chart_sandbox import UnsafeCodeError, answers_match, exec_answer_code
+from chart_sandbox import answers_match, diagnose_answer_code
 
 
 def _ascii_bars(categories: List[str], series: List[float], width: int = 36) -> str:
@@ -72,7 +72,6 @@ def extract_python_code(raw: str) -> str:
 
 
 def parse_text_number(raw: str) -> Optional[float]:
-    """取回复中出现的最后一个数值（支持小数与负数）。"""
     text = raw.strip()
     if not text:
         return None
@@ -95,23 +94,63 @@ def grade_mode_a(task: Dict[str, Any], model_raw: str) -> Tuple[bool, str]:
     return False, f"wrong_number:parsed={val} gold={gold}"
 
 
-def grade_mode_b(task: Dict[str, Any], model_raw: str) -> Tuple[bool, str]:
+def diagnose_mode_b(task: Dict[str, Any], model_raw: str) -> Dict[str, Any]:
     gold = task["gold"]
     series = [float(x) for x in task.get("series") or []]
     table = task.get("table")
     code = extract_python_code(model_raw)
-    if not code.strip():
-        return False, "empty_code"
     tbl = table if isinstance(table, list) and len(table) > 0 else None
-    try:
-        got = exec_answer_code(code, series, tbl)
-    except UnsafeCodeError as e:
-        return False, f"unsafe_or_invalid:{e}"
-    except Exception as e:
-        return False, f"runtime_error:{type(e).__name__}:{e}"
-    if answers_match(gold, got):
-        return True, "ok"
-    return False, f"wrong_answer:got={got!r} gold={gold!r}"
+    diag = diagnose_answer_code(code, series, tbl)
+    if diag.ok:
+        got = diag.answer
+        if answers_match(gold, got):
+            return {
+                "ok": True,
+                "reason": "ok",
+                "error_bucket": "success",
+                "error_code": "ok",
+                "diagnostic_message": "执行成功，且答案与 gold 一致。",
+                "line": None,
+                "col": None,
+                "end_line": None,
+                "end_col": None,
+                "fragment": code,
+                "precise_location": False,
+                "answer": got,
+                "gold": gold,
+                "code": code,
+            }
+        return {
+            "ok": False,
+            "reason": f"wrong_answer:got={got!r} gold={gold!r}",
+            "error_bucket": "answer_wrong",
+            "error_code": "wrong_answer",
+            "diagnostic_message": f"代码成功执行，但得到答案 {got!r}，gold 为 {gold!r}。",
+            "line": None,
+            "col": None,
+            "end_line": None,
+            "end_col": None,
+            "fragment": code,
+            "precise_location": False,
+            "answer": got,
+            "gold": gold,
+            "code": code,
+        }
+    assert diag.error is not None
+    rec = diag.error.to_record()
+    return {
+        "ok": False,
+        "reason": f"{rec['error_bucket']}:{rec['error_code']}",
+        **rec,
+        "answer": None,
+        "gold": gold,
+        "code": code,
+    }
+
+
+def grade_mode_b(task: Dict[str, Any], model_raw: str) -> Tuple[bool, str]:
+    out = diagnose_mode_b(task, model_raw)
+    return bool(out["ok"]), str(out["reason"])
 
 
 def load_tasks(path: Path) -> List[Dict[str, Any]]:

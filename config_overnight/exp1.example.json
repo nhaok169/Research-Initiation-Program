@@ -1,11 +1,13 @@
 {
   "base_url": "https://integrate.api.nvidia.com/v1",
-  "model": "microsoft/phi-3.5-vision-instruct",
+  "model": "meta/llama-3.2-3b-instruct",
   "api_key_env": "NVIDIA_API_KEY",
-  "prompt_dir": "prompt_dump_overnight",
-  "out_jsonl": "model_outputs_overnight.jsonl",
+  "tasks_file": "tasks_overnight.json",
+  "out_jsonl": "exp1_compare_overnight.jsonl",
   "temperature": 0.0,
-  "sleep_seconds": 0.25,
+  "sleep_seconds": 0.3,
   "request_timeout_seconds": 600,
-  "system_file": "SYSTEM.txt"
+  "max_retries": 8,
+  "retry_backoff_seconds": 10,
+  "max_calls_per_task": 3
 }

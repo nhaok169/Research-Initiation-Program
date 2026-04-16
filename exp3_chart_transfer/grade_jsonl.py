@@ -1,4 +1,4 @@
-"""读取 exp3 模型输出 jsonl，统计方式 A / B 正确率。"""
+"""读取 exp3 模型输出 jsonl，统计 A/B 正确率，并写出 mode B 诊断字段。"""
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from typing import Any, Dict, List
 
-from chart_evaluator import grade_mode_a, grade_mode_b, load_tasks
+from chart_evaluator import diagnose_mode_b, grade_mode_a, load_tasks
 
 
 def main() -> None:
@@ -32,10 +32,34 @@ def main() -> None:
             task = tasks[tid]
             if mode == "a":
                 ok, reason = grade_mode_a(task, raw)
-                rows.append({"task_id": tid, "mode": "a", "ok": ok, "reason": reason, "raw": raw})
+                rows.append({
+                    "task_id": tid,
+                    "mode": "a",
+                    "ok": ok,
+                    "reason": reason,
+                    "raw": raw,
+                })
             elif mode == "b":
-                ok, reason = grade_mode_b(task, raw)
-                rows.append({"task_id": tid, "mode": "b", "ok": ok, "reason": reason, "raw": raw})
+                info = diagnose_mode_b(task, raw)
+                rows.append({
+                    "task_id": tid,
+                    "mode": "b",
+                    "ok": bool(info["ok"]),
+                    "reason": str(info["reason"]),
+                    "error_bucket": info.get("error_bucket"),
+                    "error_code": info.get("error_code"),
+                    "diagnostic_message": info.get("diagnostic_message"),
+                    "line": info.get("line"),
+                    "col": info.get("col"),
+                    "end_line": info.get("end_line"),
+                    "end_col": info.get("end_col"),
+                    "fragment": info.get("fragment"),
+                    "precise_location": bool(info.get("precise_location")),
+                    "answer": info.get("answer"),
+                    "gold": info.get("gold"),
+                    "code": info.get("code"),
+                    "raw": raw,
+                })
             else:
                 raise SystemExit(f"unknown mode: {mode}")
 

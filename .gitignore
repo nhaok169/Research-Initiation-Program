@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+logs_overnight_*/
+**/config_overnight_autogen.json
+exp3_chart_transfer/exp3_vision_outputs.jsonl

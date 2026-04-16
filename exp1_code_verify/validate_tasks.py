@@ -79,7 +79,7 @@ def main() -> None:
         print("tasks.json 校验失败:", file=sys.stderr)
         for e in all_errs:
             print(" ", e, file=sys.stderr)
-        print("\n修复 tasks.json 后请执行: python dump_prompts.py", file=sys.stderr)
+        print("\n修复 tasks.json 后请重新运行任务生成或 run_exp1_compare。", file=sys.stderr)
         sys.exit(1)
     print("tasks.json 校验通过:", len(data), "个任务，起点/终点可通行。")
 
